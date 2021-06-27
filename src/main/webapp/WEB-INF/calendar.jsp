@@ -14,17 +14,35 @@
     <title>Calendar</title>
 </head>
 <body>
-<div class="main mt-5 container border border-2 border-dark p-3" style="width:400px; height:400px">
-    <div class="month mt-2 container justify-content-between d-flex">
-        <div id="month"></div>
-        <div class="d-flex">
-            <p class="btn btn-secondary" onclick="changeMonth(0)" style="margin-right: 20px" >Prev</p>
-            <p class="btn btn-secondary" onclick="changeMonth(1)" >Next</p>
+<div class="container mt-5 d-flex">
+    <div class="container">
+        <div class="container text-center">
+            <h2>Thank You For Choosing RheShroomz!</h2>
+            <h5 class="mt-2 mb-4">Please select a day for your appointment</h5>
+        </div>
+        <div class="main sticky-top container border border-2 border-dark p-3 align-items-center d-flex flex-column"
+             style="width:400px;">
+            <div class="month mt-2 container justify-content-between d-flex">
+                <div id="month">
+                    <%--            js generated month name--%>
+                </div>
+                <div class="d-flex" id="buttons">
+                    <%---                js generated buttons ---%>
+                    <p class="btn btn-secondary" onclick="changeMonth(1)">Next</p>
+                </div>
+            </div>
+            <table id="calendar" style="width:380px; height:300px">
+                <%--       js generated calendar    --%>
+            </table>
         </div>
     </div>
-<%--    <div id="calendar"></div>--%>
-    <table id="calendar" style="width:380px; height:300px"></table>
-
+<%--    Hidden until date is clicked--%>
+    <div class="container mt-5" id="timeDiv" style="visibility: hidden;" >
+        <h5>Please Select a time</h5>
+        <div id="times">
+<%--            js generate times slots--%>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="script/script.js"></script>

@@ -1,0 +1,13 @@
+td, tr {
+    text-align: center;
+    width: 250px;
+    vertical-align: middle;
+}
+
+.validDay, .today {
+    margin:0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}

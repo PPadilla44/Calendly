@@ -7,6 +7,7 @@ import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +88,13 @@ public class HomeController {
         event = client.events().insert(calendarId, event).execute();
         System.out.printf("Event created: %s\n", event.getHtmlLink());
         return "redirect:/new/event";
+    }
+
+    @GetMapping("/calendar/{test}")
+    public String test(@PathVariable("test")String date, Model model) {
+        System.out.println(date);
+        model.addAttribute("date", date);
+        return "showDate.jsp";
     }
 
 }
