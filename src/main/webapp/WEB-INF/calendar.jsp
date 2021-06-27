@@ -16,74 +16,16 @@
 <body>
 <div class="main mt-5 container border border-2 border-dark p-3" style="width:400px; height:400px">
     <div class="month mt-2 container justify-content-between d-flex">
-        <h4>July 2021</h4>
-        <div>
-            <p class="me-2">Prev</p>
-            <p>Next</p>
+        <div id="month"></div>
+        <div class="d-flex">
+            <p class="btn btn-secondary" onclick="changeMonth(0)" style="margin-right: 20px" >Prev</p>
+            <p class="btn btn-secondary" onclick="changeMonth(1)" >Next</p>
         </div>
     </div>
-    <table class="table">
-        <thead>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        </tbody>
-
-
-    </table>
-
+<%--    <div id="calendar"></div>--%>
+    <table id="calendar" style="width:380px; height:300px"></table>
 
 </div>
 </body>
+<script type="text/javascript" src="script/script.js"></script>
 </html>

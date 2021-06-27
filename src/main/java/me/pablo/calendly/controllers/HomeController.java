@@ -21,6 +21,11 @@ import java.util.Arrays;
 @Controller
 public class HomeController {
 
+    @GetMapping("/")
+    public String redirectToLogin() {
+        return "redirect:/login/google";
+    }
+
     @GetMapping("/calendar")
     public String showCalendar() {
         return "calendar.jsp";
@@ -46,7 +51,7 @@ public class HomeController {
         Calendar client = (Calendar) session.getAttribute("client");
 
         Event event = new Event()
-                .setSummary("Treasure Island")
+                .setSummary("NEW TEST")
                 .setLocation("Treasure AC")
                 .setDescription("FUN FUN FUN");
 
@@ -55,7 +60,7 @@ public class HomeController {
                 .setDateTime(startDateTime)
                 .setTimeZone("America/Los_Angeles");
         event.setStart(start);
-        DateTime endDateTime = new DateTime("2021-06-27T07:00:00");
+        DateTime endDateTime = new DateTime("2021-06-28T07:00:00");
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("America/Los_Angeles");
@@ -65,7 +70,6 @@ public class HomeController {
         event.setRecurrence(Arrays.asList(recurrence));
 
         EventAttendee[] attendees = new EventAttendee[]{
-                new EventAttendee().setEmail("whosfamish@gmail.com"),
                 new EventAttendee().setEmail("padilla.pablo1998@gmail.com"),
         };
         event.setAttendees(Arrays.asList(attendees));

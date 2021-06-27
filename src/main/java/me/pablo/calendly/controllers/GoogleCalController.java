@@ -88,7 +88,7 @@ public class GoogleCalController {
 
 //        System.out.println("cal message:" + message);
         session.setAttribute("client", client);
-        return "redirect:/new/event";
+        return "redirect:/calendar";
     }
 
     public Set<Event> getEvents() throws IOException {
