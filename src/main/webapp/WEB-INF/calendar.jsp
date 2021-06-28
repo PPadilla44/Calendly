@@ -36,11 +36,11 @@
             </table>
         </div>
     </div>
-<%--    Hidden until date is clicked--%>
-    <div class="container mt-5" id="timeDiv" style="visibility: hidden;" >
+    <%--    Hidden until date is clicked--%>
+    <div class="container mt-5" id="timeDiv" style="visibility: hidden;">
         <h5>Please Select a time</h5>
         <div id="times">
-<%--            js generate times slots--%>
+            <%--            js generate times slots--%>
         </div>
     </div>
 </div>

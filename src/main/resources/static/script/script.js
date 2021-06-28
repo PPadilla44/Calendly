@@ -137,8 +137,8 @@ function showTimeTable(elem){
 
 function makeAppointment(time) {
 
-    const month = date.getMonth();
-    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
     const inputDate = new Date(year, month);
     inputDate.setDate(date.getDate());
     const inputTime = time.innerHTML;
@@ -149,10 +149,26 @@ function makeAppointment(time) {
     } else {
         parsedTime = parseInt(inputTime[0])
     }
-
     inputDate.setHours(parsedTime);
-    window.location.href ="http://localhost:9000/calendar/"+ inputDate;
-    return inputDate;
+
+    let day = inputDate.getDate();
+    let hour = inputDate.getHours();
+
+    console.log(day)
+
+    if(day < 10) {
+        day = "0" + day;
+    }
+    if(month < 10) {
+        month = "0" + month;
+    }
+    if(hour < 10) {
+        hour = "0" + hour;
+    }
+
+    //2021-06-28T07:00:00
+    let formatDateString = `${year}-${month}-${day}T${hour}:00:00`
+    window.location.href ="http://localhost:9000/calendar/"+ formatDateString;
 }
 
 

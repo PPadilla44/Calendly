@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Controller
@@ -42,32 +43,44 @@ public class HomeController {
     }
 
     @PostMapping("/new/event")
-    public String createEvent(HttpSession session, @RequestParam("startDate") String startDate,
-                              @RequestParam("startTime") String startTime) throws IOException {
+    public String createEvent(HttpSession session, @RequestParam("date") String inputDate) throws IOException {
 
-        System.out.println("Start DAte " + startDate);
-        System.out.println("Start Time " + startTime);
-        System.out.println(startDate + "T" + startTime);
+        String justDate = inputDate.substring(0,10);
+
+        String startTime = inputDate.substring(11,13);
+
+        int intStartTime = Integer.parseInt(startTime);
+        intStartTime += 1;
+
+        String endTime = intStartTime + "";
+        if(intStartTime < 10) {
+            endTime = "0" + endTime;
+        }
+
+        String inputEndDateTime = justDate + "T" + endTime + ":00:00-07:00";
+        inputDate += "-07:00";
+
 
         Calendar client = (Calendar) session.getAttribute("client");
 
         Event event = new Event()
-                .setSummary("NEW TEST")
+                .setSummary("Island Visit")
                 .setLocation("Treasure AC")
-                .setDescription("FUN FUN FUN");
+                .setDescription("Island visit full of looting!");
 
-        DateTime startDateTime = new DateTime(startDate + "T" + startTime + ":00");
+        DateTime startDateTime = new DateTime(inputDate);
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("America/Los_Angeles");
+
         event.setStart(start);
-        DateTime endDateTime = new DateTime("2021-06-28T07:00:00");
+        DateTime endDateTime = new DateTime(inputEndDateTime);
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("America/Los_Angeles");
         event.setEnd(end);
 
-        String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=2"};
+        String[] recurrence = new String[]{"RRULE:FREQ=DAILY;COUNT=1"};
         event.setRecurrence(Arrays.asList(recurrence));
 
         EventAttendee[] attendees = new EventAttendee[]{
@@ -87,11 +100,11 @@ public class HomeController {
         String calendarId = "primary";
         event = client.events().insert(calendarId, event).execute();
         System.out.printf("Event created: %s\n", event.getHtmlLink());
-        return "redirect:/new/event";
+        return "redirect:/calendar";
     }
 
-    @GetMapping("/calendar/{test}")
-    public String test(@PathVariable("test")String date, Model model) {
+    @GetMapping("/calendar/{date}")
+    public String test(@PathVariable("date")String date, Model model) {
         System.out.println(date);
         model.addAttribute("date", date);
         return "showDate.jsp";

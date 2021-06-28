@@ -12,6 +12,10 @@
     <title>ShowDate</title>
 </head>
 <body>
-    <h1><c:out value="${date}"/></h1>
+<h1><c:out value="${date}"/></h1>
+<form action="/new/event" method="post">
+    <input type="hidden" name="date" value="${date}">
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
