@@ -98,7 +98,7 @@ public class HomeController {
         event.setReminders(reminders);
 
         String calendarId = "primary";
-        event = client.events().insert(calendarId, event).execute();
+//        event = client.events().insert(calendarId, event).execute();
         System.out.printf("Event created: %s\n", event.getHtmlLink());
         return "redirect:/calendar";
     }

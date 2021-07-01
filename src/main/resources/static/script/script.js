@@ -18,35 +18,37 @@ const date = new Date();
 const calendar = document.getElementById("calendar");
 
 
+
+
 function createCalendar(elem, year, month) {
     let mon = month;
     let d = new Date(year, mon);
 
     // Write Current month from monthArray
     let writeMonth = document.getElementById("month");
-    writeMonth.innerHTML = "<h4>"+ monthArray[mon] + " " +  d.getFullYear() +"</h4>";
+    writeMonth.innerHTML = "<h4>" + monthArray[mon] + " " + d.getFullYear() + "</h4>";
 
     // Create Header of days of week names
     let table = "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr>";
 
     // Spaces for the first row
-    for(let i = 0; i < d.getDay(); i++) {
-        table += "<td></td>";
+    for (let i = 0; i < d.getDay(); i++) {
+        table += "<td class='filler'></td>";
     }
 
     // Actual Dates
-    while(d.getMonth() === mon) {
+    while (d.getMonth() === mon) {
 
-        if(d.getMonth() === today.getMonth() && d.getDate() === today.getDate() && d.getFullYear() === today.getFullYear()) {
-            table += "<td class='bg-danger'><p class='today' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
-        } else if(d.getMonth() > today.getMonth() || d.getDate() > today.getDate() || d.getFullYear() > today.getFullYear()) {
-            table += "<td class='bg-primary'><p class='validDay' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
-        } else  {
+        if (d.getMonth() === today.getMonth() && d.getDate() === today.getDate() && d.getFullYear() === today.getFullYear()) {
+            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p class='validDay' onclick='showTimeTable(this)'>*" + d.getDate() + "*</p></td>";
+        } else if (d.getMonth() > today.getMonth() || d.getDate() > today.getDate() || d.getFullYear() > today.getFullYear()) {
+            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p class='validDay' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
+        } else {
             table += "<td><p>" + d.getDate() + "</p></td>";
         }
 
         // Saturday last day of week
-        if(d.getDay() === 6) {
+        if (d.getDay() === 6) {
             table += "</tr><tr>"
         }
 
@@ -54,9 +56,9 @@ function createCalendar(elem, year, month) {
     }
 
     // Spaces for last row
-    if(d.getDay() !== 0) {
-        for(let i = d.getDay(); i < 7; i++) {
-            table += "<td></td>";
+    if (d.getDay() !== 0) {
+        for (let i = d.getDay(); i < 7; i++) {
+            table += "<td class='filler'></td>";
         }
     }
 
@@ -70,29 +72,37 @@ function createCalendar(elem, year, month) {
 createCalendar(calendar, date.getFullYear(), date.getMonth());
 
 // Function to change months forward or back
-function changeMonth (direction) {
+function changeMonth(direction) {
     let newMonth = date.getMonth();
     let newYear = date.getFullYear();
 
     let buttons = document.getElementById("buttons");
+    let next = document.getElementById("next");
+    let prev = document.getElementById("prev");
 
-    if(direction === 1) {
+    if (direction === 1) {
         newMonth++;
+        if (newMonth >= today.getMonth() + 1  && date.getFullYear() === today.getFullYear()) {
+            next.style.visibility = "hidden";
+            prev.style.visibility = "visible";
+        } else {
+            next.style.visibility = "visible";
+            prev.style.visibility = "visible";
+        }
 
-        buttons.innerHTML = '<p class="btn btn-secondary" id="prev" onClick="changeMonth(0)" style="margin-right: 20px">Prev</p>' +
-            '                <p class="btn btn-secondary" onclick="changeMonth(1)">Next</p>'
 
     } else {
         newMonth--;
-        if(newMonth === today.getMonth() && date.getFullYear() === today.getFullYear()) {
-            buttons.innerHTML = '<p class="btn btn-secondary" onclick="changeMonth(1)">Next</p>'
+        if (newMonth === today.getMonth() && date.getFullYear() === today.getFullYear()) {
+            next.style.visibility = "visible";
+            prev.style.visibility = "hidden";
         }
     }
-    if(newMonth === -1) {
+    if (newMonth === -1) {
         newMonth = 11;
         newYear--;
     }
-    if(newMonth === 12) {
+    if (newMonth === 12) {
         newMonth = 0;
         newYear++;
     }
@@ -101,7 +111,8 @@ function changeMonth (direction) {
     createCalendar(calendar, newYear, newMonth)
 }
 
-function showTimeTable(elem){
+function showTimeTable(elem) {
+
 
     const day = parseInt(elem.innerHTML);
     date.setDate(day);
@@ -117,19 +128,29 @@ function showTimeTable(elem){
     const times = document.getElementById("times");
     let timeStringBuilder = "";
 
-    if(day === today.getDate()) {
+    if (day === today.getDate()) {
 
-        for(let i = currHour + 1; i <= maxTime; i++) {
-            timeStringBuilder += "<p class='times btn btn-primary' style='width:75px' onclick='makeAppointment(this)'>" +  i + ":00"  + "</p>";
+        for (let i = currHour + 1; i <= maxTime; i++) {
+            timeStringBuilder += "<p class='times btn btn-primary' style='width:75px' onclick='makeAppointment(this)'>" + i + ":00" + "</p>";
         }
 
     } else {
 
-        for(let i = minTime; i <= maxTime; i++) {
-            timeStringBuilder += "<p class='times btn btn-primary' style='width:75px' onclick='makeAppointment(this)'>" +  i + ":00"  + "</p>";
+        for (let i = minTime; i <= maxTime; i++) {
+            timeStringBuilder += "<p class='times btn btn-primary' style='width:75px' onclick='makeAppointment(this)'>" + i + ":00" + "</p>";
         }
 
     }
+    // day = [13] each element is hour max = 3
+    // [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    // Make 2 hour appointment at 11 am
+    // [0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0]
+    // Make 1 hour appointment at 11 am
+    // [0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0]
+    // Make 2 hour appointment at 10 am
+    // [0,1,3,1,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    //Month [days[], days[]]
 
     times.innerHTML = timeStringBuilder;
 
@@ -144,8 +165,8 @@ function makeAppointment(time) {
     const inputTime = time.innerHTML;
 
     let parsedTime;
-    if(inputTime.length > 4) {
-        parsedTime = parseInt(inputTime.substr(0,2));
+    if (inputTime.length > 4) {
+        parsedTime = parseInt(inputTime.substr(0, 2));
     } else {
         parsedTime = parseInt(inputTime[0])
     }
@@ -156,19 +177,41 @@ function makeAppointment(time) {
 
     console.log(day)
 
-    if(day < 10) {
+    if (day < 10) {
         day = "0" + day;
     }
-    if(month < 10) {
+    if (month < 10) {
         month = "0" + month;
     }
-    if(hour < 10) {
+    if (hour < 10) {
         hour = "0" + hour;
     }
 
     //2021-06-28T07:00:00
     let formatDateString = `${year}-${month}-${day}T${hour}:00:00`
-    window.location.href ="http://localhost:9000/calendar/"+ formatDateString;
+    window.location.href = "http://localhost:9000/calendar/" + formatDateString;
+
+//     let url = "http://localhost:9000/calendar/confirmation";
+//     let data = {date: formatDateString};
+//
+//     fetch(url, {
+//         body: JSON.stringify(data),
+//         method: "POST",
+//         headers: {"Content-Type": "application; charset=UTF-8"},
+// })
+// .then(res => {
+//     console.log(res);
+//     /*return res.json();*/
+// })
+//     .catch(err => {
+//         console.log(err)
+//     })
 }
 
+function dim(elem) {
+    elem.className = "hoveredDay";
+}
+function undim(elem) {
+    elem.className = "day";
+}
 

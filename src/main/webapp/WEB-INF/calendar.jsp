@@ -28,7 +28,9 @@
                 </div>
                 <div class="d-flex" id="buttons">
                     <%---                js generated buttons ---%>
-                    <p class="btn btn-secondary" onclick="changeMonth(1)">Next</p>
+                    <p class="btn btn-secondary" id="prev" onClick="changeMonth(0)" style="margin-right: 20px" style="visibility: visible";">Prev</p>
+
+                    <p class="btn btn-secondary" id="next" style="visibility: visible" onclick="changeMonth(1)">Next</p>
                 </div>
             </div>
             <table id="calendar" style="width:380px; height:300px">

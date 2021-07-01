@@ -4,10 +4,28 @@ td, tr {
     vertical-align: middle;
 }
 
-.validDay, .today {
+.validDay{
     margin:0 auto;
     width: 28px;
     height: 28px;
     border-radius: 50%;
     cursor: pointer;
+}
+.day{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #f5f5f5
+}
+.hoveredDay{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: cornflowerblue;
+}
+.filler{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
