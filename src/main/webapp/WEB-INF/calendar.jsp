@@ -14,33 +14,33 @@
     <title>Calendar</title>
 </head>
 <body>
-<div class="container mt-5 d-flex">
-    <div class="container">
+<div class="container-fluid p-3 d-flex justify-content-center" style="background-color: #E7E0C9; height: 100vh;">
+    <div class="container p-3 border border-dark  rounded shadow-lg" style="background-color: rgb(193, 207, 192); width: 500px; height: fit-content">
         <div class="container text-center">
-            <h2>Thank You For Choosing RheShroomz!</h2>
-            <h5 class="mt-2 mb-4">Please select a day for your appointment</h5>
+            <h2 style="color: #11324D">Thank You For Choosing Pablo's Pizza Palace!</h2>
+            <h5 style="color: #11324D" class="mt-2 mb-4">Please select a day for your appointment</h5>
         </div>
         <div class="main sticky-top container border border-2 border-dark p-3 align-items-center d-flex flex-column"
-             style="width:400px;">
+             style="width:425px;">
             <div class="month mt-2 container justify-content-between d-flex">
-                <div id="month">
+                <div id="month" style="color: #11324D">
                     <%--            js generated month name--%>
                 </div>
                 <div class="d-flex" id="buttons">
                     <%---                js generated buttons ---%>
-                    <p class="btn btn-secondary" id="prev" onClick="changeMonth(0)" style="margin-right: 20px" style="visibility: visible";">Prev</p>
+                    <p class="btn btn-secondary" id="prev" onclick="changeMonth(0)"  style="visibility: hidden; margin-right: 20px">Prev</p>
 
                     <p class="btn btn-secondary" id="next" style="visibility: visible" onclick="changeMonth(1)">Next</p>
                 </div>
             </div>
-            <table id="calendar" style="width:380px; height:300px">
+            <table id="calendar" style="width:400px; height:300px">
                 <%--       js generated calendar    --%>
             </table>
         </div>
     </div>
     <%--    Hidden until date is clicked--%>
-    <div class="container mt-5" id="timeDiv" style="visibility: hidden;">
-        <h5>Please Select a time</h5>
+    <div class="mt-5" id="timeDiv" style="visibility: hidden;">
+        <h5 style="color: white;">Please Select a time</h5>
         <div id="times">
             <%--            js generate times slots--%>
         </div>

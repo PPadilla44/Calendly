@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Date;
 
 @Controller
 public class HomeController {
@@ -106,7 +106,12 @@ public class HomeController {
     @GetMapping("/calendar/{date}")
     public String test(@PathVariable("date")String date, Model model) {
         System.out.println(date);
-        model.addAttribute("date", date);
+        String sDate1 = date;
+        LocalDateTime parsedDate = LocalDateTime.parse(sDate1);
+        model.addAttribute("day", parsedDate.getDayOfMonth());
+        model.addAttribute("month", parsedDate.getMonth());
+        model.addAttribute("time", parsedDate.getHour());
+
         return "showDate.jsp";
     }
 

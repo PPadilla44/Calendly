@@ -40,11 +40,11 @@ function createCalendar(elem, year, month) {
     while (d.getMonth() === mon) {
 
         if (d.getMonth() === today.getMonth() && d.getDate() === today.getDate() && d.getFullYear() === today.getFullYear()) {
-            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p class='validDay' onclick='showTimeTable(this)'>*" + d.getDate() + "*</p></td>";
+            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p style='color: #11324D; font-weight: bolder' class='validDay' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
         } else if (d.getMonth() > today.getMonth() || d.getDate() > today.getDate() || d.getFullYear() > today.getFullYear()) {
-            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p class='validDay' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
+            table += "<td onmouseover='dim(this)' onmouseout='undim(this)' class='day'><p style='color: #11324D' class='validDay' onclick='showTimeTable(this)'>" + d.getDate() + "</p></td>";
         } else {
-            table += "<td><p>" + d.getDate() + "</p></td>";
+            table += "<td><p style='color: #11324D'>" + d.getDate() + "</p></td>";
         }
 
         // Saturday last day of week
@@ -123,7 +123,14 @@ function showTimeTable(elem) {
 
 
     const timeDiv = document.getElementById("timeDiv");
+    timeDiv.innerHTML =
+        `<h5 style="color: white;">Please Select a time</h5>
+        <div id="times">
+            <%--            js generate times slots--%>
+        </div>`;
     timeDiv.style.visibility = "visible";
+
+    timeDiv.innerHTML = `<h3 id='date-chosen'> ${(monthArray[date.getMonth()])} ${day}</h3>` + timeDiv.innerHTML;
 
     const times = document.getElementById("times");
     let timeStringBuilder = "";

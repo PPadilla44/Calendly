@@ -2,30 +2,116 @@ td, tr {
     text-align: center;
     width: 250px;
     vertical-align: middle;
+    color: #11324D;
+    margin: 0;
+}
+
+td {
+    width: 60px !important;
+    margin: .25rem !important;
+}
+
+p{
+    margin: 0;
 }
 
 .validDay{
-    margin:0 auto;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+    margin:0;
     cursor: pointer;
 }
-.day{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background-color: #f5f5f5
+
+.validDay p {
+    color: red;
+    background-color: red;
 }
+.day{
+    text-align: center;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    background-color: #6B7AA1;
+    margin: .5rem;
+}
+
 .hoveredDay{
     border-radius: 50%;
     width: 50px;
     height: 50px;
     cursor: pointer;
-    background-color: cornflowerblue;
+    background-color: #E7E0C9;
+    box-shadow: 0 0 10px 3px black;
+    z-index: 3;
+    transition: 400ms;
 }
 .filler{
     border-radius: 50%;
     width: 50px;
     height: 50px;
+}
+
+#prev{
+    background-color: #11324D;
+    border-radius: 5px;
+
+}
+
+#prev:hover {
+    box-shadow: 0 0 15px 5px black;
+    transition: 300ms;
+}
+
+#next {
+    background-color: #11324D;
+    border-radius: 5px;
+}
+
+#next:hover {
+    box-shadow: 0 0 15px 3px black;
+    transition: 300ms;
+
+}
+
+#timeDiv {
+    background-color: #11324D;
+    text-align: center;
+    height: 350px;
+    width: 300px;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#times {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.times {
+    background-color: #C1CFC0;
+    border: 1px solid #6B7AA1;
+    margin: .25rem;
+    color: black;
+}
+
+.times:hover {
+    background-color: #929b91;
+    box-shadow: 0 0 15px 3px black;
+    font-weight: 600;
+    border: none;
+}
+
+#date-chosen {
+    color: white;
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: #6B7AA1;
+    width: 200px;
+    border-radius: 10px;
+    padding: .25rem;
+    text-align: center;
 }
